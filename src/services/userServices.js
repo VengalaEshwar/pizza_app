@@ -1,5 +1,5 @@
+const { createCart } = require("../repositories/cartRepository");
 const { findUser, insertUser } = require("../repositories/userRepository");
-
   async function registerUser(userDetails) {
     let user =await findUser({
       email: userDetails.email,
@@ -13,12 +13,14 @@ const { findUser, insertUser } = require("../repositories/userRepository");
       lastName: userDetails.lastName,
       mobileNO: userDetails.mobileNO,
       email: userDetails.email,
-      password: userDetails.password
+      password: userDetails.password,
+      role : userDetails.role
     });
     if(!userData)
     {
         throw { reason : "Something went,wrong",statusCode : 501}
     }
+    await createCart(userData._id);
     return userData;
   }
 module.exports = {registerUser};

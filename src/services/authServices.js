@@ -17,7 +17,7 @@ async function loginService(userDetails)
         throw {message : "invalid user" , statusCode  : 401}
     }
 
-    let token = jwt.sign({email : user.email,id : user._id},SECRET_KEY)
+    let token = jwt.sign({email : user.email,id : user._id,role : user.role},SECRET_KEY)
     return token;
 }
 module.exports={

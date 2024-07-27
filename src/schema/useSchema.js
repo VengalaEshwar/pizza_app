@@ -33,6 +33,12 @@ const userSchema= mongoose.Schema({
         type : "String",
         required : true,
         minlength : [6,"password length should be minimum 5"]
+    },
+    role :{
+        type : String,
+        required : false,
+        default : "USER",
+        enum : ['USER','ADMIN']
     }
      
 },{

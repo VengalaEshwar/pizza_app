@@ -11,7 +11,8 @@ async function insertUser(userDetails)
         lastName : userDetails.lastName,
         mobileNO : userDetails.mobileNO,
         email : userDetails.email,
-        password : userDetails.password
+        password : userDetails.password,
+        role : userDetails.role
     })
     return userData;
 }
