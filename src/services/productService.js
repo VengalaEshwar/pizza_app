@@ -5,7 +5,6 @@ async function createProduct(productDetails){
     try {
         let productImage = productDetails.imagePath;
         response=await cloudinary.uploader.upload(productImage);
-        console.log(response.secure_url);
         await createProductRepo({
             ...productDetails,
             productImage : response.secure_url
@@ -14,7 +13,6 @@ async function createProduct(productDetails){
         return response;
     } catch (error) {
         console.log(error );
-        console.log("from here");
     }
 }
 async function getProductByIdService(id){

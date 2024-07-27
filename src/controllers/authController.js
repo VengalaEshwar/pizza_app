@@ -23,6 +23,25 @@ async function login(req,res)
         })
     }
 }
+async function logout(req, res) {
+
+    console.log("Cookie from frontend", req.cookies);
+
+    res.cookie("authToken", "", {
+        httpOnly: true,
+        secure: COOKIE_SECURE,
+        sameSite: "lax",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        domain: FRONTEND_URL
+    });
+    return res.status(200).json({
+        success: true,
+        message: "Log out successfull",
+        error: {},
+        data: {}
+    });
+}
 module.exports={
-    login
+    login,
+    logout
 }

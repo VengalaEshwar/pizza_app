@@ -11,7 +11,7 @@ const uploader = require('./src/middlewares/multerMiddleware');
 const cloudinary = require('./src/config/cloudinaryConfig');
 const fs = require('fs/promises');
 const productRouter = require('./src/routes/productRouter');
-
+const orderRouter = require('./src/routes/orderRoutes');
 const app = express();
 
 //middlewares
@@ -20,9 +20,10 @@ app.use(express.text());
 app.use(cookieParser())
 app.use(express.urlencoded());
 app.use("/users",userRouter);
-app.use('/carts',cartRouter);
+app.use('/carts',cartRouter); 
 app.use("/auth",authRouter);
 app.use("/products",productRouter);
+app.use('/orders', orderRouter);
 app.get("/ping",isLoggedIn,(req,res)=>{
     res.json({
         message : "pong"

@@ -23,7 +23,6 @@ function isLoggedIn(req,res,next)
             data : {}
         });
     }
-    console.log(decode);
     req.user={
         email : decode.email,
         id : decode.id,
@@ -35,10 +34,8 @@ function isAdmin(req,res,next)
 {
     try {
         let role = req.user.role;
-        console.log(role +" authoValidator");
         if(role==='ADMIN')
         {
-            console.log("admin is authorized");
             next();
         }
         else{

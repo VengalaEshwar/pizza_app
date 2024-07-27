@@ -1,42 +1,47 @@
 const mongoose = require('mongoose');
-const orderSchema = mongoose.Schema({
+
+const orderSchema = new mongoose.Schema({
     user: {
-      type: mongoose.Schema.Types.ObjectId,
-      require: true,
-      ref: "user",
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
     items: [
-      {
-        product: {
-          type: mongoose.Schema.Types.ObjectId,
-          require: true,
-          ref: "product",
-        },
-        quantity :{
-          type : Number,
-          default : 1,
-          require : false
+        {
+            product: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'product',
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true,
+                default: 1
+            }
         }
-      },
     ],
-    totalPice :{
-        type : Number,
-        require : true
+    totalPrice: {
+        type: Number,
+        required: true,
     },
-    status :{
-        type : String,
-        default : 'CANCELLED',
-        enum : ['ORDERED','CANCELLED','DEVLIVERED','PROCESSING','OUT_FOR_DELIVERY']
+    status: {
+        type: String,
+        default: "ORDERED",
+        enum: ["ORDERED", "CANCELLED", "DELIVERED", "PROCESSING", "OUT_FOR_DELIVERY"]
     },
-    address :{
-        type : String,
-        minlength:[10,"minlength should be 10"]
+    address: {
+        type: String,
+        minLength: [10, "Address should be of atleast 10 characters"]
     },
-    paymentMethod : {
-        type : String,
-        enum : ['ONLINE','CASH'],
-        default : 'CASH'
-    } 
-  },{timestamps : true});
-  const order = mongoose.model('order',orderSchema);
-  module.exports=order;
+    paymentMethod: {
+        type: String,
+        enum: ["ONLINE", "CASH"],
+        default: "CASH"
+    }
+}, {
+    timestamps: true
+});
+
+const Order = mongoose.model('Order', orderSchema);
+
+module.exports = Order;

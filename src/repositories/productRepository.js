@@ -3,7 +3,6 @@ const Product = require('../schema/productSchema');
 async function createProductRepo(productDetails){
     try {
         const response = await Product.create(productDetails);
-        console.log(response);
         return response;
     } catch (error) {
         // throw {error : "Something went wrong" ,statusCode : 501};
@@ -12,9 +11,8 @@ async function createProductRepo(productDetails){
 }
 async function getProductByIdRepo(id){
     try {
-        const response = await Product.find({_id : id});
+        const response = await Product.findOne({_id : id});
         console.log(response);
-        console.log("resoposne");
         return response;
     } catch (error) {
         // throw {error : "Something went wrong" ,statusCode : 501};
@@ -25,7 +23,6 @@ async function deleteProductByIdRepo(id){
     try {
         const response = await Product.deleteOne({_id : id});
         console.log(response);
-        console.log("resoposne");
         return response;
     } catch (error) {
         // throw {error : "Something went wrong" ,statusCode : 501};

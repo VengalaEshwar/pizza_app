@@ -1,5 +1,6 @@
 const { getProductById } = require("../controllers/productController");
 const { getCartUSerById } = require("../repositories/cartRepository");
+const { getProductByIdRepo } = require("../repositories/productRepository");
 const AppError = require("../utils/appError");
 async  function getCartByUserId(id){
     try {
@@ -15,7 +16,7 @@ async  function getCartByUserId(id){
 async function modifyCart(userId, productId, shouldAdd = true) {
     const quantityValue = (shouldAdd == true) ? 1 : -1;
     const cart = await getCartUSerById(userId);
-    const product = await getProductById(productId);
+    const product = await getProductByIdRepo(productId);
     if(!product) {
         throw new NotFoundError("Product");
     }
@@ -26,13 +27,14 @@ async function modifyCart(userId, productId, shouldAdd = true) {
     // May be the product is already in the cart
     let foundProduct = false;
     cart.items.forEach(item => {
-        console.log(item)
         if(item.product._id == productId) {
             if(shouldAdd) {
                 if(product.quantity >= item.quantity + 1)
                     item.quantity += quantityValue;
                 else 
-                    throw new AppError("The quantity of the item requested is not available", 404);
+                    {
+                        throw new AppError("The quantity of the item requested is not available", 404);
+                    }
             } else {
                 if(item.quantity > 0) {
                     item.quantity += quantityValue;
