@@ -1,5 +1,5 @@
 const { createProduct, getProductByIdService ,deleteProductByIdService} = require("../services/productService");
-
+const AppError = require("../utils/appError");
 async function addProduct(req,res){
     try {
         const product = await createProduct({ //productService

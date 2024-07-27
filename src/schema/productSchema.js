@@ -20,6 +20,11 @@ const productSchema = Schema({
         enum : ['veg','non-veg','drinks','sides'],
         default : 'veg'
     },
+    quantity: {
+        type: Number,
+        required: true,
+        default: 10
+    },
     productImage : {
         type  : String,
         required : [false]

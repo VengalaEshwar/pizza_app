@@ -1,8 +1,10 @@
+const { createCart } = require('../repositories/cartRepository');
 const {registerUser} = require('../services/userServices')
 const createUser = async (req,res)=>{
     try {
         console.log("Enter create user ccontroller"); 
         let response =await registerUser(req.body); 
+        // let cartResponse = awat createCart()
         console.log("response" + response);
         res.status(201).json({
             success : true,
